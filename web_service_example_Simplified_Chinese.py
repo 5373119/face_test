@@ -59,6 +59,7 @@ def detect_faces_in_image(file_stream):
     # 载入用户上传的图片
     img = face_recognition.load_image_file(file_stream)
 
+    print(f"pony: img is \n {img}")
 
     face_landmarks_list = face_recognition.face_landmarks(img)
     
