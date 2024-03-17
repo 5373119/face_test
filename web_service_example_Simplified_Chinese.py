@@ -58,8 +58,13 @@ def detect_faces_in_image(file_stream):
 
     # 载入用户上传的图片
     img = face_recognition.load_image_file(file_stream)
+    
+    face_locations = face_recognition.face_locations(img)
+    
+    print(f"pony: face_locations is \n {face_locations}")
 
-    print(f"pony: img is \n {img}")
+    #这是tensor数据
+    #print(f"pony: img is \n {img}")
 
     face_landmarks_list = face_recognition.face_landmarks(img)
     
