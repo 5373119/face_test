@@ -56,16 +56,11 @@ def upload_image():
 
 def detect_faces_in_image(file_stream):
     
-    width,height = file_stream.size
-
-    #display width and height
-
-    print("pony: The height of the image is: ", height)
-
-    print("pony: The width of the image is: ", width)
-
     # 载入用户上传的图片
     img = face_recognition.load_image_file(file_stream)
+    
+    #图像宽度和高度
+    print(f"pony: img.shape is {img.shape},len(img) is {len(img)} ,img.size is {img.size}")
     
     face_locations = face_recognition.face_locations(img)
     
