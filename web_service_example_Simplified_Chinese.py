@@ -107,7 +107,7 @@ def detect_faces_in_image(file_stream):
         "face_found_in_image": face_found,
         "is_picture_of_obama": is_obama
     }
-    return jsonify(result)
+    return jsonify(face_landmarks_list)
 
 
 if __name__ == "__main__":
