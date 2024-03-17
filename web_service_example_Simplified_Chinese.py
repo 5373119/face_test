@@ -59,17 +59,25 @@ def detect_faces_in_image(file_stream):
     # 载入用户上传的图片
     img = face_recognition.load_image_file(file_stream)
     
+    shape = img.shape
+    
+    width = shape[0]
+    
+    height = shape[1]
+    
     #图像宽度和高度
-    print(f"pony: img.shape is {img.shape},len(img) is {len(img)} ,img.size is {img.size}")
+    print(f"pony: img.width is {width},height is {height}")
     
-    face_locations = face_recognition.face_locations(img)
+    #定位第一个人脸   这里要做异常校验
     
-    print(f"pony: face_locations is \n {face_locations}")
+    first_location = face_recognition.face_locations(img)[0]
+    
+    print(f"pony: first_location is  {first_location}")
+        
+    print(f"pony: first_location.width is  {first_location[2]-first_location[0]},first_location.height is  {first_location[1]-first_location[3]}")
+  
 
-    #这是tensor数据
-    #print(f"pony: img is \n {img}")
-
-    face_landmarks_list = face_recognition.face_landmarks(img)
+    face_landmarks_list = face_recognition.face_landmarks(img,face_locations=first_location)
     
     print(f"pony: face_landmarks_list is \n {face_landmarks_list}")
 
