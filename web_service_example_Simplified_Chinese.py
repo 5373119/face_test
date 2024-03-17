@@ -70,11 +70,11 @@ def detect_faces_in_image(file_stream):
     
     #定位第一个人脸   这里要做异常校验
     
-    face_locations = face_recognition.face_locations(img)[0]
+    face_locations = face_recognition.face_locations(img)
     
     print(f"pony: face_locations is  {face_locations}")
         
-    print(f"pony: first.width is  {face_locations[2]-face_locations[0]},first.height is  {face_locations[1]-face_locations[3]}")
+    print(f"pony: first.width is  {face_locations[0][2]-face_locations[0][0]},first.height is  {face_locations[0][1]-face_locations[0][3]}")
 
     face_landmarks_list = face_recognition.face_landmarks(img,face_locations=face_locations)
     
