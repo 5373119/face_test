@@ -59,13 +59,15 @@ def detect_faces_in_image(file_stream):
     # 载入用户上传的图片
     img = face_recognition.load_image_file(file_stream)
 
+
     face_landmarks_list = face_recognition.face_landmarks(img)
     
     print(f"pony: face_landmarks_list is \n {face_landmarks_list}")
 
+    # 讲识别结果以json键值对的数据结构输出
 
     return jsonify(face_landmarks_list)
-
+      
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
