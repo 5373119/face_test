@@ -98,6 +98,10 @@ def detect_faces_in_image(file_stream):
         if match_results[0]:
             is_obama = True
 
+    face_landmarks_list = face_recognition.face_landmarks(img)
+    print(f"pony: face_landmarks_list is \n {face_landmarks_list}")
+
+
     # 讲识别结果以json键值对的数据结构输出
     result = {
         "face_found_in_image": face_found,
