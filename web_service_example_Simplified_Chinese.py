@@ -39,6 +39,7 @@ def upload_image():
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
+             print(f"pony: **************** upload filename is {file.filename}******************")
             # 图片上传成功，检测图片中的人脸
             return detect_faces_in_image(file)
 
@@ -61,21 +62,43 @@ def detect_faces_in_image(file_stream):
     
     shape = img.shape
     
-    width = shape[0]
+    img_width = shape[0]
     
-    height = shape[1]
+    img_height = shape[1]
     
     #图像宽度和高度
-    print(f"pony: img.width is {width},height is {height}")
+    print(f"pony: img.width is {img_width},height is {img_height}")
     
     #定位第一个人脸   这里要做异常校验
     
     face_locations = face_recognition.face_locations(img)
     
     print(f"pony: face_locations is  {face_locations}")
+    
+    if face_locations == []:
+            
+        print(f"pony: there is no face in the img")    
         
-    print(f"pony: first.width is  {face_locations[0][2]-face_locations[0][0]},first.height is  {face_locations[0][1]-face_locations[0][3]}")
+        return "there is no face in the img"
+        
+    if len(face_locations) >1 :
+            
+        print(f"pony: there is more than one face in the img")    
+        
+        return "there is more than one face in the img"    
+        
+    face_width = face_locations[0][2]-face_locations[0][0]
 
+    face_height = face_locations[0][1]-face_locations[0][3]
+    
+    print(f"pony: face_width is  {face_width},face_height is {face_height}")
+        
+    if face_width < img_width/5 and face_height < img_height/5 :
+            
+        print(f"pony: face area is too small")    
+        
+        return "face area is too small"      
+ 
     face_landmarks_list = face_recognition.face_landmarks(img,face_locations=face_locations)
     
     print(f"pony: face_landmarks_list is \n {face_landmarks_list}")
@@ -83,7 +106,6 @@ def detect_faces_in_image(file_stream):
     # 讲识别结果以json键值对的数据结构输出
 
     return jsonify(face_landmarks_list)
-      
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
