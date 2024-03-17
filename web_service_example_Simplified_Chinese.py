@@ -39,7 +39,7 @@ def upload_image():
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
-             print(f"pony: **************** upload filename is {file.filename}******************")
+            print(f"pony: **************** upload filename is {file.filename}******************")
             # 图片上传成功，检测图片中的人脸
             return detect_faces_in_image(file)
 
